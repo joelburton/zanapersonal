@@ -67,7 +67,7 @@ DATABASES = {
 
 ########## CACHE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#caches
-CACHES = {}
+# CACHES = {}
 ########## END CACHE CONFIGURATION
 
 
