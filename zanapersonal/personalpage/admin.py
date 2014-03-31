@@ -51,11 +51,13 @@ admin.site.register(Website, WebsiteAdmin)
 class PageAdmin(admin.ModelAdmin):
     """Admin for pages."""
 
-    list_display = ('slug', 'title', 'description', 'published')
+    list_display = ('website', 'slug', 'title', 'description', 'published')
 
     list_display_links = ('slug', 'title')
 
     search_fields = ('slug', 'title', 'description', 'body')
+
+    list_filter = ('website', 'published')
 
     fieldsets = (
         (None, {
