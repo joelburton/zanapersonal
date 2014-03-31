@@ -5,7 +5,6 @@ Pillow==2.3.1
 django-appconf==0.6
 django-ckeditor-updated==4.2.8
 django-imagekit==3.2
--e git://github.com/theatlantic/django-phatpages.git@65999304ffcdb277a84053a8a2f498b153efd402#egg=django_phatpages-v1.0.0
 pilkit==1.1.6
 psycopg2==2.5.2
 six==1.6.1
