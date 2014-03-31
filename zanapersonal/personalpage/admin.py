@@ -21,18 +21,23 @@ class WebsiteAdmin(admin.ModelAdmin):
                 'headshot',
                 'bio',
                 'twitter',
-            )}),
+            ),
+            'description': "Information for biographical block that appears in the right column.",
+            }),
         ('Appearance', {
             'fields': (
                 'stylesheet',
                 'css',
-            )}),
+            ),
+            'description': "Settings for the appearance of the site.",
+            }),
         ('Homepage', {
             'fields': (
                 'homepage_title',
                 'homepage_description',
                 'homepage_body',
-            )})
+            ),
+            'description': "Content for homepage of site."})
     )
 
     list_display = ('title', 'domain', 'name')
@@ -73,7 +78,9 @@ class PageAdmin(admin.ModelAdmin):
             'fields': (
                 'navigation_title',
                 'priority',
-            )}),
+            ),
+            'description': "Settings for the top navigation bar.",
+            }),
     )
 
     prepopulated_fields = {"slug": ["title"]}

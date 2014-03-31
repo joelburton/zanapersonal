@@ -1,6 +1,5 @@
 """Common settings and globals."""
 
-
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 
@@ -233,3 +232,29 @@ SOUTH_TESTS_MIGRATE = False
 
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            {'name': 'styles',
+             'items': ['Format', 'FontSize']},
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic']},
+            {'name': 'colors',
+             'items': ['TextColor', 'BGColor']},
+            {'name': 'clipboard',
+             'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote']},
+            {'name': 'links',
+             'items': ['Link', 'Unlink']},
+            {'name': 'insert',
+             'items': ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar']},
+        ],
+
+        'height': 300,
+        'width': 1000,
+        'addPlugins': 'link',
+    },
+}

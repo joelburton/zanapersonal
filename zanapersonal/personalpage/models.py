@@ -88,14 +88,18 @@ class Website(models.Model):
     )
 
     homepage_title = models.CharField(
+        verbose_name='title',
         max_length=100,
     )
 
     homepage_description = models.TextField(
+        verbose_name='description',
         blank=True,
     )
 
-    homepage_body = RichTextField()
+    homepage_body = RichTextField(
+        verbose_name='body'
+    )
 
     users = models.ManyToManyField(
         django.contrib.auth.get_user_model(),
@@ -121,12 +125,10 @@ class Page(models.Model):
 
     title = models.CharField(
         max_length=100,
-        verbose_name='page title'
     )
 
     description = models.TextField(
         blank=True,
-        verbose_name='page description',
         help_text='Appears at the top of the page.'
     )
 
