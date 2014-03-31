@@ -48,6 +48,8 @@ class Website(models.Model):
     stylesheet = models.CharField(
         max_length=100,
         choices=STYLESHEET_CHOICES,
+        help_text="You can see <a href='http://www.bootstrapcdn.com/#bootswatch_tab'"
+                  " target='_blank'>examples of these styles</a>"
     )
 
     name = models.CharField(
