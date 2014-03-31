@@ -255,6 +255,5 @@ CKEDITOR_CONFIGS = {
 
         'height': 300,
         'width': 1000,
-        'addPlugins': 'link',
     },
 }

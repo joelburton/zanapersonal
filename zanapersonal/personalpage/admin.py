@@ -1,7 +1,8 @@
 from django.contrib import admin
+from django.db import models
+from django import forms
 
 from .models import Website, Page
-from .views import PageCreationView
 
 
 class WebsiteAdmin(admin.ModelAdmin):
@@ -43,6 +44,10 @@ class WebsiteAdmin(admin.ModelAdmin):
     list_display = ('title', 'domain', 'name')
 
     list_display_links = ('title', 'domain', 'name')
+
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': forms.CheckboxSelectMultiple}
+    }
 
     def get_queryset(self, request):
         if request.user.is_superuser:
