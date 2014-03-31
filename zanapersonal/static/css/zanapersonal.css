@@ -11,3 +11,7 @@ footer {
 .bio-block {
     margin-top: 2em;
 }
+
+.bio-block h2 {
+    font-size: 170%;
+}
