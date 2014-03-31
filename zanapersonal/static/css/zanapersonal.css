@@ -19,3 +19,12 @@ footer {
 .twitter-feed {
     margin-top: 2em;
 }
+
+.website-edit-form,
+.page-edit-form {
+    margin: 1em 0;
+}
+
+.page-edit-form .form-group:first-of-type {
+    display: none;
+}

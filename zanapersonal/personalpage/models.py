@@ -49,11 +49,13 @@ class Website(models.Model):
         max_length=100,
         choices=STYLESHEET_CHOICES,
         help_text="You can see <a href='http://www.bootstrapcdn.com/#bootswatch_tab'"
-                  " target='_blank'>examples of these styles</a>"
+                  " target='_blank'>examples of these styles</a>",
+        default=STYLESHEET_CHOICES[0],
     )
 
     name = models.CharField(
         max_length=30,
+        blank=True,
         help_text="Your name, as it should appear at the top of your bio block.",
     )
 
@@ -85,13 +87,14 @@ class Website(models.Model):
 
     css = models.TextField(
         verbose_name="custom CSS",
-        help_text="Custom CSS for this site.",
+        help_text="Custom CSS for this site (for advanced users).",
         blank=True,
     )
 
     homepage_title = models.CharField(
         verbose_name='title',
         max_length=100,
+        default='Welcome to My Site',
     )
 
     homepage_description = models.TextField(
@@ -100,7 +103,8 @@ class Website(models.Model):
     )
 
     homepage_body = RichTextField(
-        verbose_name='body'
+        verbose_name='body',
+        blank=True,
     )
 
     users = models.ManyToManyField(
@@ -114,7 +118,7 @@ class Website(models.Model):
         return "website.detail", (), {}
 
     def get_admin_url(self):
-        return "/admin/personalpage/website/%s" % self.id
+        return "/-settings/"
 
     def __unicode__(self):
         return self.title
@@ -172,14 +176,11 @@ class Page(models.Model):
 
     @permalink
     def get_absolute_url(self):
-        if self.slug == "":
-            return "page.home", (), {}
+        return "page.detail", (), {'slug': self.slug}
 
-        else:
-            return "page.detail", (), {'slug': self.slug}
-
+    @permalink
     def get_admin_url(self):
-        return "/admin/personalpage/page/%s" % self.id
+        return "page.update", (), {'slug': self.slug}
 
 
 

@@ -43,7 +43,7 @@
       {% if editable %}
         <ul class="nav navbar-nav navbar-right">
           <li><a href="{{ object.get_admin_url }}">Edit</a></li>
-          <li><a href="/admin/personalpage/page/add/">Add Page</a></li>
+          <li><a href="/-add-page/">Add Page</a></li>
           <li><a href="/admin/logout/">Logout</a></li>
         </ul>
       {% endif %}
@@ -53,41 +53,62 @@
 
 <div class="container">
   <div class="row">
+
+    {# Show session flash messages #}
+    {% if messages %}
+      <div class="messages">
+        <p class="sr-only">Notifications:</p>
+
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message|safe }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
     <div class="col-md-8 body-block">
       {% block content %}
         <p>Use this document as a way to quick start any new project.</p>
       {% endblock content %}
     </div>
-    <div class="col-md-3 col-md-offset-1 bio-block">
-      {% if request.site.headshot %}
-        <img src="{{ request.site.headshot.url }}" class="headshot"/>
-      {% endif %}
-      <h2>{{ request.site.name }}</h2>
-      {{ request.site.bio|safe }}
 
-      {% with twitter=request.site.twitter %}
-        {% if twitter %}
-          <div class="twitter-feed">
-            <h3>Twitter Feed</h3>
-            <a class="twitter-timeline"
-               href="https://twitter.com/{{ twitter }}"
-               data-screen-name="{{ twitter }}"
-               data-chrome="nofooter noheader noborders"
-               data-tweet-limit="2"
-               data-widget-id="335248905925177345">Tweets by {{ twitter }}</a>
-            <script>!function (d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-              if (!d.getElementById(id)) {
-                js = d.createElement(s);
-                js.id = id;
-                js.src = p + "://platform.twitter.com/widgets.js";
-                fjs.parentNode.insertBefore(js, fjs);
-              }
-            }(document, "script", "twitter-wjs");
-            </script>
-          </div>
+    <div class="col-md-3 col-md-offset-1 bio-block">
+      {% block bioblock %}
+        {% if request.site.headshot %}
+          <img src="{{ request.site.headshot.url }}" class="headshot"/>
         {% endif %}
-      {% endwith %}
+
+        {% if request.site.name %}
+          <h2>{{ request.site.name }}</h2>
+        {% endif %}
+
+        <div class="bio">
+          {{ request.site.bio|safe }}
+        </div>
+
+        {% with twitter=request.site.twitter %}
+          {% if twitter %}
+            <div class="twitter-feed">
+              <h3>Twitter Feed</h3>
+              <a class="twitter-timeline"
+                 href="https://twitter.com/{{ twitter }}"
+                 data-screen-name="{{ twitter }}"
+                 data-chrome="nofooter noheader noborders"
+                 data-tweet-limit="2"
+                 data-widget-id="335248905925177345">Tweets by {{ twitter }}</a>
+              <script>!function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                if (!d.getElementById(id)) {
+                  js = d.createElement(s);
+                  js.id = id;
+                  js.src = p + "://platform.twitter.com/widgets.js";
+                  fjs.parentNode.insertBefore(js, fjs);
+                }
+              }(document, "script", "twitter-wjs");
+              </script>
+            </div>
+          {% endif %}
+        {% endwith %}
+      {% endblock %}
 
     </div>
   </div>

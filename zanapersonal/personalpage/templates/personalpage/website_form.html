@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+  {{ form.media }}
+
+  <div class="page-header">
+  <h1>Edit {{ view.title }}</h1>
+  </div>
+
+  <ul class="nav nav-tabs">
+    <li class="{{ view.settings_active }}">
+      <a href="{% url 'website.settings' %}">Settings</a>
+    </li>
+    <li class="{{ view.biographical_active }}">
+      <a href="{% url 'website.biographical' %}">Biographical Block</a>
+    </li>
+    <li class="{{ view.appearance_active }}">
+      <a href="{% url 'website.appearance' %}">Appearance</a>
+    </li>
+    <li class="{{ view.homepage_active }}">
+      <a href="{% url 'website.homepage' %}">Homepage</a>
+    </li>
+  </ul>
+
+  <form method="post" class="website-edit-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form | bootstrap }}
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-default" href="{{ object.get_absolute_url }}">Cancel</a>
+  </form>
+
+{% endblock %}
+
+
+{% block bioblock %}
+{% endblock %}

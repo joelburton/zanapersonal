@@ -174,6 +174,7 @@ DJANGO_APPS = (
 LOCAL_APPS = (
     'ckeditor',
     'personalpage',
+    'bootstrapform',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

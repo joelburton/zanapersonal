@@ -4,6 +4,8 @@ from django.shortcuts import redirect
 from django.views import generic
 
 from .models import Page, Website
+from .forms import WebsiteSettingsForm, WebsiteBiographicalForm, WebsiteHomepageForm, \
+    WebsiteAppearanceForm, PageForm
 
 
 class HomepageView(generic.DetailView):
@@ -78,10 +80,67 @@ class PageDetailView(generic.DetailView):
         return context
 
 
-class PageCreationView(generic.CreateView):
+class WebsiteBaseUpdate(generic.UpdateView):
+    template_name = "personalpage/website_form.html"
+
+    def get_object(self, queryset=None):
+        return self.request.site
+
+    def form_valid(self, form):
+        messages.add_message(self.request,
+                             messages.SUCCESS,
+                             "Website updated.")
+        return super(WebsiteBaseUpdate, self).form_valid(form)
+
+
+class WebsiteSettingsUpdateView(WebsiteBaseUpdate):
+    form_class = WebsiteSettingsForm
+    settings_active = "active"
+    title = "Settings"
+
+
+class WebsiteBiographicalUpdateView(WebsiteBaseUpdate):
+    form_class = WebsiteBiographicalForm
+    biographical_active = "active"
+    title = "Biographical Information"
+
+
+class WebsiteAppearanceUpdateView(WebsiteBaseUpdate):
+    form_class = WebsiteAppearanceForm
+    appearance_active = "active"
+    title = "Appearance"
+
+
+class WebsiteHomepageUpdateView(WebsiteBaseUpdate):
+    form_class = WebsiteHomepageForm
+    homepage_active = "active"
+    title = "Homepage"
+
+
+class PageCreateView(generic.CreateView):
+    form_class = PageForm
     model = Page
 
-    def get_form(self, form_class):
-        form = super(PageCreationView, self).get_form(form_class)
-        import pdb; pdb.set_trace()
+    def get_initial(self):
+        sites = Website.objects.filter(users=self.request.user)
+        return {'website': sites[0]}
+
+    def form_valid(self, form):
+        messages.add_message(self.request,
+                             messages.SUCCESS,
+                             "Page added.")
+        return super(PageCreateView, self).form_valid(form)
+
+
+class PageUpdateView(generic.UpdateView):
+    model = Page
+    form_class = PageForm
+
+    def form_valid(self, form):
+        messages.add_message(self.request,
+                             messages.SUCCESS,
+                             "Page updated.")
+        return super(PageUpdateView, self).form_valid(form)
+
+
 
