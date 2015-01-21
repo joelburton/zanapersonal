@@ -41,6 +41,7 @@ Desktop.ini
 # Django-y stuff
 /media
 /assets
-/conf/uwsgi/__secret.ini
+/zanapersonal/env.py
+/zanapersonal/env-production.py
 /venv
 

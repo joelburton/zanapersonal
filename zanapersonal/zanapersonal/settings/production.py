@@ -58,7 +58,7 @@ DATABASES = {
         'USER': 'zanapersonal',
         'PASSWORD': get_env_setting('PG_PASSWORD'),
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': get_env_setting('PG_PORT'),
         'CONN_MAX_AGE': None,
     }
 }
